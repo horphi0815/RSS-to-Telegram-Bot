@@ -146,6 +146,15 @@ def cmd_test(update, context):
     rss_d = feedparser.parse(url)
     rss_d.entries[0]['link']
     update.effective_message.reply_text(rss_d.entries[0]['link'])
+    
+#####proposal (not functional)
+def cmd_load(update, context):
+    ip = "192.168.1.10"
+    cmd = "curl -X POST --data-urlencode "url={{}}" http://{{}}:8080/youtube-dl/q".format(url, ip)
+    myCmd = os.popen(cmd).read()
+    #print(myCmd)
+    update.effective_message.reply_text("Download created" + myCmd)
+
 
 
 def init_sqlite():
@@ -164,6 +173,8 @@ def main():
     dp.add_handler(CommandHandler("test", cmd_test, ))
     dp.add_handler(CommandHandler("list", cmd_rss_list))
     dp.add_handler(CommandHandler("remove", cmd_rss_remove))
+    dp.add_handler(CommandHandler("load", cmd_load))
+
 
     # try to create a database if missing
     try:
