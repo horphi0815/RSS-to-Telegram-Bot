@@ -1,3 +1,10 @@
+FROM ubuntu:16.04
+
+# Install prerequisites
+RUN apt-get update && apt-get install -y \
+curl
+CMD /bin/bash
+
 # Use an official Python runtime as a parent image
 FROM python:3.7-slim
 
